@@ -1,0 +1,130 @@
+﻿@model TrainingManagmentSystem.Models.ExternalTraining
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>פרטי הדרכה</h2>
+
+<div>
+    <table class="table" style="font-size:12px">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.type)
+            </td>
+        </tr>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingDate)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.TrainingDate)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfMeetings)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.NumberOfMeetings)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Duration)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingEnd)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.TrainingEnd)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Location)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Cost)
+            </td>
+        </tr>
+</table>
+  
+</div>
+<td style="width:400px;">
+
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id=Model.ExternalTrainingID})">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>ערוך</span>
+        </a>
+    </div>
+
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action( "index")">
+            <span class="glyphicon glyphicon-list"></span>
+            <span>חזור לרשימה</span>
+        </a>
+    </div>
+    <br />
+    <br />
+
+    <div>
+        <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Create", "EmployeeInExternalTraining", new { id = Model.ExternalTrainingID })">
+            <span class="glyphicon glyphicon-plus"></span>
+            <span>הרשמת עובד</span>
+        </a>
+    </div>
+    <br />
+
+    <div>
+        <a type="button" class="btn btn-success btn-sm" href="@Url.Action("EmployeesInExternalTraining","EmployeeInExternalTraining", new { id = Model.ExternalTrainingID })">
+            <span class="glyphicon glyphicon-save"></span>
+            <span>רשימת עובדים בהדרכה</span>
+        </a>
+    </div>
+
+
+
+</td>
+
+<style>
+    th {
+        text-align: right
+    }
+</style>

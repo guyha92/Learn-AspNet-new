@@ -1,0 +1,99 @@
+﻿@model IEnumerable<TrainingManagmentSystem.Models.EmployeeInTraining>
+
+@{
+    ViewBag.Title = "עובדים בהדרכה";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>רשימת עובדים בהדרכה</h2>
+
+@*@Html.ActionLink("חזור אחורה", "index");*@
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.EmployeeZehut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Training.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IfPass)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.EmployeeZehut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Training.Name)
+        </td>
+        <td>
+            @Html.CheckBoxFor(modelItem => item.IfPass)
+        </td>       
+        <td style="width:700px;">
+            <div class="btn-group" role="group">
+                <abbr title="עריכה">
+                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id = item.EmployeeInTrainingID })">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </abbr>
+
+                <abbr title="פרטים">
+
+                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details",new { id = item.EmployeeInTrainingID })">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                </abbr>
+
+                <abbr title="מחיקה">
+
+                    <a type="button" class="btn btn-danger btn-sm" href="@Url.Action("Delete",new { id = item.EmployeeInTrainingID })">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </abbr>
+            </div>
+        </td>
+    </tr>
+
+    }
+
+
+
+</table>
+
+<div>
+    @Html.ActionLink("חזור לפרטי ההדרכה", "Details", "Training", new { id = ViewBag.id }, null)
+</div>
+
+
+<style>
+    abbr[title] {
+        border-bottom: none !important;
+        cursor: inherit !important;
+        text-decoration: none !important;
+    }
+
+    th {
+        text-align: right;
+        width: 120px;
+    }
+</style>

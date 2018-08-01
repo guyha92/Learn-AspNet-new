@@ -1,0 +1,41 @@
+﻿@model TrainingManagmentSystem.Models.EmployeeInTraining
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>פרטי עובד בקורס</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Training.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Training.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IfPass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IfPass)
+        </dd>
+
+    </dl>
+</div>
+<p>    
+    @Html.ActionLink("חזור לרשימה", null, null, null, new { href = Request.UrlReferrer })
+</p>

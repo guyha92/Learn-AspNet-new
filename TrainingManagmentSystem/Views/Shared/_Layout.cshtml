@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" >
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - TMS</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    
+</head>
+<body>
+    <div class="navbar pull-right navbar-inverse navbar-fixed-top">
+        <div class="container" style="background-color:#ffffff">
+            <div class="navbar-header pull-left">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")"><image src="~/Content/Images/tmslogo3.png" style="max-width:120px; margin-top:-10px;"></a>
+                @*@Html.ActionLink("TMS-Training Managment System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse pull-right"  style="padding:0px">
+                <ul class="nav navbar-nav" style="padding:0px">
+                    <li class="dropdown" toggle="dropdown">
+                        <a href="#">
+                            דוחות
+                            <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("עובדים שלא עברו הדרכה", "EmployeesNotPassed", "EmployeeInTraining")</li>
+                            <li>@Html.ActionLink("עובדים ממתינים לאישור וועדה", "EmployeeWaitingForApproval", "EmployeeInExternalTraining")</li>
+                            <li>@Html.ActionLink("עובדים שלא אושרו לקורסים", "EmployeeNotApproved", "EmployeeInExternalTraining")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" toggle="dropdown">
+                        <a href="#">
+                            הדרכות
+                            <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("פנים", "Index", "Training")</li>
+                            <li>@Html.ActionLink("חוץ", "Index", "ExternalTraining")</li>
+                        </ul>
+                    </li>
+
+                    @if (Roles.IsUserInRole("רגיל"))
+    {
+                <li>@Html.ActionLink("עובדים", "Index", "Employee")</li>
+}
+                    <li>@Html.ActionLink("בית", "Index", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        @RenderBody()
+        <hr />
+        <footer class="footer">
+            <p>&copy; 2018 - TMS-Training Managment System</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/Scripts/jquery-3.1.1.js")*@
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+    @Scripts.Render("~/Scripts/moment.js")
+    
+
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<style>
+    .footer{
+        float:left;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    .nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+        margin-top: 0;
+    }    
+
+</style>

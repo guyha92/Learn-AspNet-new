@@ -1,0 +1,119 @@
+﻿@model TrainingManagmentSystem.Models.ExternalTraining
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>מחיקת הדרכה</h2>
+
+<h3>
+    האם את/ה בטוח/ה שברצונך להסיר הדרכה זאת?
+</h3>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.type)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.type)
+                </td>
+            </tr>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.TrainingDate)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.TrainingDate)
+                </td>
+            </tr>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfMeetings)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.NumberOfMeetings)
+                </td>
+            </tr>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Duration)
+                </td>
+            </tr>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.TrainingEnd)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.TrainingEnd)
+                </td>
+            </tr>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Location)
+                </td>
+            </tr>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Cost)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Cost)
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="הסר" class="btn btn-danger" />
+                <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("index")">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>חזור לרשימה</span>
+                </a>
+            </div>
+        </div>            
+    </div>
+}
+<br />
+<style>
+    th {
+        text-align: right
+    }
+
+    table {
+        font-size: 12px
+    }
+</style>

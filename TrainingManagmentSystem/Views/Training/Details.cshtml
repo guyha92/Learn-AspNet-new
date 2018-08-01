@@ -1,0 +1,164 @@
+﻿@model TrainingManagmentSystem.Models.Training
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>פרטי הדרכה</h2>
+
+<div>
+    <table class="table" style="font-size:12px">
+        <tr>
+            <th>
+                <span>סקטורים</span>
+            </th>
+
+            <td>
+                @foreach (var item in Model.TrainingSubSectors)
+                {
+                    <div>&nbsp;@Html.DisplayFor(modelItem => item.SubSector.Sector.SectorType)</div>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingSubSectors)
+            </th>
+
+            <td>
+                @foreach (var item in Model.TrainingSubSectors)
+                {
+                    <div>&nbsp;@Html.DisplayFor(modelItem => item.SubSector.SubSectortype)</div>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingDate)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.TrainingDate)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpirationDate)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.ExpirationDate)
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfMeetings)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.NumberOfMeetings)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Duration)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpireDate)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.ExpireDate)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingEnd)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.TrainingEnd)
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Location)
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+<td style="width:400px;">
+
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id=Model.TrainingID})">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>ערוך</span>
+        </a>
+    </div>
+
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action( "index")">
+            <span class="glyphicon glyphicon-list"></span>
+            <span>חזור לרשימה</span>
+        </a>
+    </div>
+    <br />
+    <br />
+
+    <div>
+        <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Create", "EmployeeInTraining", new { id = Model.TrainingID })">
+            <span class="glyphicon glyphicon-plus"></span>
+            <span>הרשמת עובד</span>
+        </a>
+    </div>
+    <br />
+
+    <div>
+        <a type="button" class="btn btn-success btn-sm" href="@Url.Action("EmployeesInTraining","EmployeeInTraining", new { id = Model.TrainingID })">
+            <span class="glyphicon glyphicon-save"></span>
+            <span>רשימת עובדים בהדרכה</span>
+        </a>
+    </div>
+
+
+
+</td>
+
+<style>
+    th {
+        text-align: right
+    }
+</style>
+

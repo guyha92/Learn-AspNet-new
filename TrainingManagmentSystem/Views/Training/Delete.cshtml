@@ -1,0 +1,146 @@
+﻿@model TrainingManagmentSystem.Models.Training
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>מחיקת הדרכה</h2>
+
+<h3>
+    האם את/ה בטוח/ה שברצונך להסיר הדרכה זאת?
+</h3>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    <span>סקטורים</span>
+                </th>
+
+                <td>
+                    @foreach (var item in Model.TrainingSubSectors)
+                    {
+                        <div>&nbsp;@Html.DisplayFor(modelItem => item.SubSector.Sector.SectorType)</div>
+                    }
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrainingSubSectors)
+                </th>
+
+                <td>
+                    @foreach (var item in Model.TrainingSubSectors)
+                    {
+                        <div>&nbsp;@Html.DisplayFor(modelItem => item.SubSector.SubSectortype)</div>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrainingDate)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.TrainingDate)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpirationDate)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.ExpirationDate)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfMeetings)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.NumberOfMeetings)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Duration)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpireDate)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.ExpireDate)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrainingEnd)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.TrainingEnd)
+                </td>
+            </tr>
+
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Location)
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="הסר" class="btn btn-danger" />
+            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("index")">
+                <span class="glyphicon glyphicon-list"></span>
+                <span>חזור לרשימה</span>
+            </a>
+        </div>
+    </div>
+}
+    <br />
+    <style>
+        th {
+            text-align: right
+        }
+
+        table {
+            font-size: 12px
+        }
+    </style>

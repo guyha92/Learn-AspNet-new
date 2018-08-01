@@ -1,0 +1,183 @@
+﻿@model PagedList.IPagedList<TrainingManagmentSystem.Models.Employee>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "עובדים";
+}
+
+<h2>רשימת עובדים</h2>
+<br />
+<p>
+
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span>צור עובד חדש</span>
+    </a>
+</p>
+
+@using (Html.BeginForm("Index", "Employee", FormMethod.Get))
+{
+    <p>
+        חיפוש עובד: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="חפש" />
+
+    </p>
+}
+<table class="table" style="font-size:13px">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().EmployeeZehut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Subsector.Sector.SectorType)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().SubSectorID)
+        </th>
+        <th>
+            @Html.ActionLink("שם משפחה", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().FirstName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().BirthDate)
+
+        </th>
+
+
+        <th>
+            @Html.ActionLink("מחלקה", "Index", new { sortOrder = ViewBag.DepartmentSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().דירוג)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().Gender)
+        </th>
+
+        <th>
+            @Html.ActionLink("תאריך כניסה", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().PositionPercentage)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().TrainingBudget)
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeZehut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subsector.Sector.SectorType)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Subsector.SubSectortype)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.מחלקה.Name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.דירוג.Name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+
+
+
+
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.PositionPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrainingBudget)
+        </td>
+
+
+        <td style="width:400px;">
+
+            <div class="btn-group" role="group">
+                <abbr title="עריכה">
+                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id=item.EmployeeID})">
+                        <span class="glyphicon glyphicon-pencil"></span>
+
+                    </a>
+                </abbr>
+
+                <abbr title="פרטים">
+                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details",new { id=item.EmployeeID })">
+                        <span class="glyphicon glyphicon-list"></span>
+
+                    </a>
+                </abbr>
+
+                <abbr title="מחיקה">
+                    <a type="button" class="btn btn-danger btn-sm" href="@Url.Action("Delete",new { id=item.EmployeeID })">
+                        <span class="glyphicon glyphicon-trash"></span>
+
+                    </a>
+                </abbr>
+            </div>
+        </td>
+    </tr>
+    }
+
+</table>
+<br />
+עמוד @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) מתוך @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<style>
+    abbr[title] {
+        border-bottom: none !important;
+        cursor: inherit !important;
+        text-decoration: none !important;
+    }
+
+    th {
+        text-align: right;
+        width: 120px;
+    }
+</style>
+
+
+

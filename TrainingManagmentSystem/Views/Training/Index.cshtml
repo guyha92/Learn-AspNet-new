@@ -1,0 +1,171 @@
+﻿@model PagedList.IPagedList<TrainingManagmentSystem.Models.Training>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "הדרכות";
+}
+
+<h2>הדרכות</h2>
+
+<p>
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span>קבע/י הדרכה</span>
+    </a>
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        חיפוש הדרכה: @Html.TextBox("SearchString")
+        <input type="submit" value="חפש" />
+
+    </p>
+}
+
+<table class="table" style="font-size:13px">
+
+    <tr>
+        <th>
+
+            <span>סקטור</span>
+
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().TrainingSubSectors)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().Name)
+        </th>
+
+        <th>
+            @Html.ActionLink("תאריך ההדרכה", "Index", new { sortOrder = ViewBag.DateSortParm })
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().ExpireDate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().TrainingEnd)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().ExpirationDate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().NumberOfMeetings)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().Duration)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.First().Location)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @foreach (var i in (item.TrainingSubSectors))
+        {
+            <div>&nbsp;@Html.DisplayFor(modelItem => i.SubSector.Sector.SectorType)</div>
+    }
+        </td>
+
+
+
+        <td>
+            @foreach (var j in (item.TrainingSubSectors))
+        {
+            <div>&nbsp;@Html.DisplayFor(modelItem => j.SubSector.SubSectortype)</div>
+    }
+        </td>
+
+        <td>
+
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.TrainingDate)
+
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpireDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrainingEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpirationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfMeetings)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+
+        <td style="width:700px;">
+            <div class="btn-group" role="group">
+                <abbr title="עריכה">
+                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id=item.TrainingID })">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </abbr>
+
+                <abbr title="פרטים">
+
+                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details",new { id=item.TrainingID })">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                </abbr>
+
+                <abbr title="מחיקה">
+
+                    <a type="button" class="btn btn-danger btn-sm" href="@Url.Action("Delete",new { id=item.TrainingID })">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </abbr>
+            </div>
+        </td>
+    </tr>
+
+
+    }
+
+
+</table>
+<br />
+עמוד @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) מתוך @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<style>
+    abbr[title] {
+        border-bottom: none !important;
+        cursor: inherit !important;
+        text-decoration: none !important;
+    }
+
+    th {
+        text-align: right;
+        width: 120px;
+    }
+</style>
+
+
+

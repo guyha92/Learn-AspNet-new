@@ -1,0 +1,150 @@
+﻿@model TrainingManagmentSystem.Models.Employee
+
+@{
+    ViewBag.Title = "מחיקת עובד";
+}
+
+<h2> מחק עובד</h2>
+<p class="error">@ViewBag.ErrorMessage</p>
+
+<h3>האם את/ה בטוח/ה שברצונך להסיר עובד זה?</h3>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <table class="table">
+            <tr>
+                <th class="th">
+                    @Html.DisplayNameFor(model => model.EmployeeZehut)
+
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.EmployeeZehut)
+
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subsector.Sector.SectorType)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Subsector.Sector.SectorType)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subsector.SubSectortype)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Subsector.SubSectortype)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.LastName)
+
+                </td>
+
+            <tr>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.FirstName)
+
+                </th>
+                <td>
+
+                    @Html.DisplayFor(model => model.FirstName)
+                </td>
+            </tr>
+
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.מחלקה)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.מחלקה.Name)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.דירוג)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.דירוג.Name)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Gender)
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.StartDate)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PositionPercentage)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.PositionPercentage)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrainingBudget)
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.TrainingBudget)
+                </td>
+            </tr>
+
+
+        </table>
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="הסר" class="btn btn-danger" />
+            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("index")">
+                <span class="glyphicon glyphicon-list"></span>
+                <span>חזור לרשימה</span>
+            </a>
+        </div>
+    </div>
+}
+    <br />
+    <style>
+        th {
+            text-align: right
+        }
+    </style>
+
+
