@@ -12,9 +12,9 @@
     
 </head>
 <body>
-    <div class="navbar pull-right navbar-inverse navbar-fixed-top">
+    <div class="navbar  navbar-inverse navbar-fixed-top">
         <div class="container" style="background-color:#ffffff">
-            <div class="navbar-header pull-left">
+            <div class="navbar-header navbar-left">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -23,40 +23,37 @@
                 <a class="navbar-brand" href="@Url.Action("Index", "Home")"><image src="~/Content/Images/tmslogo3.png" style="max-width:120px; margin-top:-10px;"></a>
                 @*@Html.ActionLink("TMS-Training Managment System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse pull-right"  style="padding:0px">
-                <ul class="nav navbar-nav" style="padding:0px">
-                    <li class="dropdown" toggle="dropdown">
-                        <a href="#">
-                            דוחות
-                            <span class="glyphicon glyphicon-circle-arrow-down"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("עובדים שלא עברו הדרכה", "EmployeesNotPassed", "EmployeeInTraining")</li>
-                            <li>@Html.ActionLink("עובדים ממתינים לאישור וועדה", "EmployeeWaitingForApproval", "EmployeeInExternalTraining")</li>
-                            <li>@Html.ActionLink("עובדים שלא אושרו לקורסים", "EmployeeNotApproved", "EmployeeInExternalTraining")</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown" toggle="dropdown">
-                        <a href="#">
-                            הדרכות
-                            <span class="glyphicon glyphicon-circle-arrow-down"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("פנים", "Index", "Training")</li>
-                            <li>@Html.ActionLink("חוץ", "Index", "ExternalTraining")</li>
-                        </ul>
-                    </li>
+            <ul class="nav navbar-nav navbar-right" style="padding:0px">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        דוחות
+                        <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("עובדים שלא עברו הדרכה", "EmployeesNotPassed", "EmployeeInTraining")</li>
+                        <li>@Html.ActionLink("עובדים ממתינים לאישור וועדה", "EmployeeWaitingForApproval", "EmployeeInExternalTraining")</li>
+                        <li>@Html.ActionLink("עובדים שלא אושרו לקורסים", "EmployeeNotApproved", "EmployeeInExternalTraining")</li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        הדרכות
+                        <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("פנים", "Index", "Training")</li>
+                        <li>@Html.ActionLink("חוץ", "Index", "ExternalTraining")</li>
+                    </ul>
+                </li>
+                @if (Roles.IsUserInRole("מנהל"))
+                {
 
-                    @if (Roles.IsUserInRole("רגיל"))
-    {
+                }
                 <li>@Html.ActionLink("עובדים", "Index", "Employee")</li>
-}
-                    <li>@Html.ActionLink("בית", "Index", "Home")</li>
-                </ul>
-            </div>
+                <li>@Html.ActionLink("בית", "Index", "Home")</li>
+            </ul>
         </div>
     </div>
-
     <div class="container">
         @RenderBody()
         <hr />
@@ -71,8 +68,6 @@
     @Scripts.Render("~/Scripts/jquery.validate.min.js")
     @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
     @Scripts.Render("~/Scripts/moment.js")
-    
-
 
 
     @RenderSection("scripts", required: false)

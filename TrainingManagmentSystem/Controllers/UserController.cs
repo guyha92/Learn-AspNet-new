@@ -133,7 +133,7 @@ namespace TrainingManagmentSystem.Controllers
         {
             using (OrganizationContext context = new OrganizationContext())
             {
-                var dataItem = context.Users.Where(dbuser => dbuser.UserName == LoginUser.UserName && dbuser.Password == LoginUser.Password).First();
+                var dataItem = context.Users.Where(dbuser => dbuser.UserName == LoginUser.UserName && dbuser.Password == LoginUser.Password).FirstOrDefault();
 
                 if (dataItem != null)
                 {

@@ -73,8 +73,8 @@ namespace TrainingManagmentSystem.DAL
 
             var users = new List<User>
             {
-                new User{UserId=1,BirthDate=DateTime.Parse("01-09-1992"),ValidationPassword="123", Email="guyha92@gmail.com",FirstName="גיא",LastName="חקון",LicenseNum="123",Password="123",Organization="בית חולים",PhoneNum="0524666423",UserName="guyha",Role=0},
-                new User{UserId=1,BirthDate=DateTime.Parse("01-09-1992"),ValidationPassword="123", Email="guyha10@gmail.com",FirstName="מארק",LastName="חכם",LicenseNum="123",Password="123",Organization="בית חולים",PhoneNum="0524666423",UserName="yaniv",Role=0}
+                new User{UserId=1,BirthDate=DateTime.Parse("01-09-1992"),ValidationPassword="123", Email="guyha92@gmail.com",FirstName="גיא",LastName="חקון",LicenseNum="123",Password="123",Organization="בית חולים",PhoneNum="0524666423",UserName="guyha",Role=User.UsersRoles.מנהל},
+                new User{UserId=1,BirthDate=DateTime.Parse("01-09-1992"),ValidationPassword="123", Email="guyha10@gmail.com",FirstName="מארק",LastName="חכם",LicenseNum="123",Password="123",Organization="בית חולים",PhoneNum="0524666423",UserName="yaniv",Role=User.UsersRoles.רגיל}
             };
             users.ForEach(s => context.Users.Add(s));
             context.SaveChanges();
