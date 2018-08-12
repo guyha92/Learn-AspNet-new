@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<TrainingManagmentSystem.Models.User>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ניהול משתמשים";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
+<h2>ניהול משתמשים</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span>צור משתמש</span>
+    </a>
 </p>
-<table class="table">
+<table class="table" style="font-size:13px">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -19,12 +19,9 @@
             @Html.DisplayNameFor(model => model.Password)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ValidationPassword)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Organization)
         </th>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.LicenseNum)
         </th>
@@ -43,19 +40,19 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ValidationPassword)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Organization)
@@ -79,11 +76,43 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+            @Html.DisplayFor(modelItem => item.Role)
+        </td>
+        <td style="width:700px;">
+            <div class="btn-group" role="group">
+                <abbr title="עריכה">
+                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id = item.UserId })">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </abbr>
+                <abbr title="פרטים">
+                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details",new { id = item.UserId })">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                </abbr>
+                <abbr title="מחיקה">
+                    <a type="button" class="btn btn-danger btn-sm" href="@Url.Action("Delete",new { id = item.UserId })">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </abbr>
+            </div>
         </td>
     </tr>
-}
-
+    }
 </table>
+<br />
+
+<style>
+
+    abbr[title] {
+        border-bottom: none !important;
+        cursor: inherit !important;
+        text-decoration: none !important;
+    }
+
+    th {
+        text-align: right;
+        width: 120px;
+    }
+</style>
+

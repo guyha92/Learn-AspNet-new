@@ -14,7 +14,7 @@ namespace TrainingManagmentSystem.Controllers
     public class DegreeController : Controller
     {
         private OrganizationContext db = new OrganizationContext();
-
+        [Authorize]
         // GET: Degree
         public ActionResult Index()
         {

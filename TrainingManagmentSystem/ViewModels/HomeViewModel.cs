@@ -8,9 +8,6 @@ namespace TrainingManagmentSystem.ViewModels
 {
     public class HomeViewModel
     {
-        public IEnumerable<EmployeeInTraining> EmployeesNotPassed { get; set; }
-        public IEnumerable<EmployeeInExternalTraining> EmployeeWaitingForApproval { get; set; }
-        public IEnumerable<EmployeeInExternalTraining> EmployeeNotApproved { get; set; }
-        public IEnumerable<Training> TrainingsNearExpiration { get; set; }
+        public List<Training> TrainingsNearExpiration { get; set; }
     }
 }

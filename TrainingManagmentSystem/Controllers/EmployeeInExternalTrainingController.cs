@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using TrainingManagmentSystem.DAL;
 using TrainingManagmentSystem.Models;
 
@@ -15,6 +18,7 @@ namespace TrainingManagmentSystem.Controllers
     {
         private OrganizationContext db = new OrganizationContext();
 
+        [Authorize]
         // GET: EmployeeInTraining
         public ActionResult Index()
         {
@@ -86,23 +90,31 @@ namespace TrainingManagmentSystem.Controllers
             return View(result);
 
         }
-
-        public ActionResult EmployeeNotApproved()
+        private List<EmployeeInExternalTraining> GetEmployeeNotApproved()
         {
             var trainings = from emp in db.EmployeeInExternalTrainings
                             where emp.TrainingStatus == EmployeeInExternalTraining.TrainingStatuses.נדחה
                             select emp;
-            
-            return View(trainings.ToList());
+
+            return trainings.ToList();
         }
 
-        public ActionResult EmployeeWaitingForApproval()
+        public ActionResult EmployeeNotApproved()
+        {                       
+            return View(GetEmployeeNotApproved());
+        }
+
+        private List<EmployeeInExternalTraining> GetEmployeeWaitingForApproval()
         {
             var trainings = from emp in db.EmployeeInExternalTrainings
                             where emp.TrainingStatus == EmployeeInExternalTraining.TrainingStatuses.ממתין
                             select emp;
 
-            return View(trainings.ToList());
+            return trainings.ToList();
+        }
+        public ActionResult EmployeeWaitingForApproval()
+        {            
+            return View(GetEmployeeWaitingForApproval());
         }
 
         // GET: EmployeeInExternalTraining/Edit/5
@@ -167,6 +179,59 @@ namespace TrainingManagmentSystem.Controllers
             db.EmployeeInExternalTrainings.Remove(employeeInTraining);
             db.SaveChanges();
             return RedirectToAction("EmployeesInExternalTraining", new { id = employeeInTraining.ExternalTrainingID });
+        }
+
+        private void ExportToExcel(object DataSource)
+        {
+            var gv = new GridView();
+            gv.DataSource = DataSource;
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=DemoExcel.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "utf-8";
+
+            //Here we set the correct encoding so that all characters show!
+            Response.ContentEncoding = System.Text.Encoding.UTF8;
+            Response.Charset = "65001";
+            byte[] b = new byte[] {
+                0xef,
+                0xbb,
+                0xbf
+            };
+            Response.BinaryWrite(b);
+
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
+        }
+
+        public ActionResult EmployeesNotApprovedExcel()
+        {
+            var employeesInExternalTrainings = GetEmployeeNotApproved();
+            var result = (from empInTrain in employeesInExternalTrainings
+                          join emp in db.Employees on empInTrain.EmployeeID equals emp.EmployeeID
+                          join train in db.ExternalTrainings on empInTrain.ExternalTrainingID equals train.ExternalTrainingID
+                          select new { תעודת_זהות = emp.EmployeeZehut, שם_משפחה = emp.LastName, שם_פרטי = emp.FirstName, שם_הדרכה = train.Name, סטטוס = empInTrain.TrainingStatus}).ToList();
+
+            ExportToExcel(result);
+            return View(employeesInExternalTrainings);
+        }
+
+        public ActionResult EmployeesWaitingForApprovalExcel()
+        {
+            var employeesInExternalTrainings = GetEmployeeWaitingForApproval();
+            var result = (from empInTrain in employeesInExternalTrainings
+                          join emp in db.Employees on empInTrain.EmployeeID equals emp.EmployeeID
+                          join train in db.ExternalTrainings on empInTrain.ExternalTrainingID equals train.ExternalTrainingID
+                          select new { תעודת_זהות = emp.EmployeeZehut, שם_משפחה = emp.LastName, שם_פרטי = emp.FirstName, שם_הדרכה = train.Name, סטטוס = empInTrain.TrainingStatus }).ToList();
+
+            ExportToExcel(result);
+            return View(employeesInExternalTrainings);
         }
 
         protected override void Dispose(bool disposing)

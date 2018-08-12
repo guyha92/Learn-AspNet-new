@@ -15,6 +15,7 @@ namespace TrainingManagmentSystem.Controllers
     {
         private OrganizationContext db = new OrganizationContext();
 
+        [Authorize]
         // GET: subSector
         public ActionResult Index()
         {
@@ -39,6 +40,7 @@ namespace TrainingManagmentSystem.Controllers
         // GET: subSector/Create
         public ActionResult Create()
         {
+            ViewBag.SectorID = new MultiSelectList(db.Sectors, "SectorID", "SectorType");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace TrainingManagmentSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SubSectorID,SubSectortype")] SubSector subSector)
+        public ActionResult Create( SubSector subSector)
         {
             if (ModelState.IsValid)
             {
@@ -71,6 +73,7 @@ namespace TrainingManagmentSystem.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SectorID = new MultiSelectList(db.Sectors, "SectorID", "SectorType");
             return View(subSector);
         }
 
@@ -79,7 +82,7 @@ namespace TrainingManagmentSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SubSectorID,SubSectortype")] SubSector subSector)
+        public ActionResult Edit(SubSector subSector)
         {
             if (ModelState.IsValid)
             {
@@ -102,6 +105,7 @@ namespace TrainingManagmentSystem.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SectorID = new MultiSelectList(db.Sectors, "SectorID", "SectorType");
             return View(subSector);
         }
 

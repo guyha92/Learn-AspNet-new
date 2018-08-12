@@ -1,32 +1,45 @@
 ﻿@model TrainingManagmentSystem.Models.Sector
-
 @{
     ViewBag.Title = "Delete";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h2>מחיקת סקטור</h2>
+<h3>
+    האם את/ה בטוח/ה שברצונך להסיר את הסקטור הזה?
+</h3>
 <div>
-    <h4>Sector</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SectorType)
-        </dt>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SectorType)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.SectorType)
+            </td>
+        </tr>
+    </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.SectorType)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="הסר" class="btn btn-danger" />
+                <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("index")">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>חזור לרשימה</span>
+                </a>
+            </div>
         </div>
     }
 </div>
+<style>
+
+    th {
+        text-align: right
+    }
+
+    table {
+        font-size: 12px
+    }
+</style>

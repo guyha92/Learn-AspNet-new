@@ -1,27 +1,32 @@
-﻿@model TrainingManagmentSystem.Models.subSector
-
+﻿@model TrainingManagmentSystem.Models.SubSector
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
+<h2>פרטי תת-סקטור</h2>
 <div>
-    <h4>subSector</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.subSectorType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.subSectorType)
-        </dd>
-
-    </dl>
+    <table class="table" style="font-size:12px">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubSectortype)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.SubSectortype)
+            </td>
+        </tr>
+    </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.subSectorID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<td style="width:400px;">
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id=Model.SubSectorID})">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>ערוך</span>
+        </a>
+    </div>
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action( "index")">
+            <span class="glyphicon glyphicon-list"></span>
+            <span>חזור לרשימה</span>
+        </a>
+    </div>
+</td>

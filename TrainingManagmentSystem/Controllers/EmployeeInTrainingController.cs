@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using TrainingManagmentSystem.DAL;
+using TrainingManagmentSystem.FilterAttributes;
 using TrainingManagmentSystem.Models;
 
 namespace TrainingManagmentSystem.Controllers
@@ -15,6 +19,7 @@ namespace TrainingManagmentSystem.Controllers
     {
         private OrganizationContext db = new OrganizationContext();
 
+        [Authorize]
         // GET: EmployeeInTraining
         public ActionResult Index()
         {
@@ -78,10 +83,15 @@ namespace TrainingManagmentSystem.Controllers
             //return View(employeeInTraining);
         }
 
+        private List<EmployeeInTraining> GetEmployeeNotPassed()
+        {
+            var employeesNotPassed = db.EmployeeInTrainings.Where((emp) => emp.IfPass == false).Include(e => e.Employee).Include(e => e.Training);
+            return employeesNotPassed.ToList();
+        }
+
         public ActionResult EmployeesNotPassed()
-        {            
-            var employeesNotPassed = db.EmployeeInTrainings.Where((emp)=> emp.IfPass==false).Include(e => e.Employee).Include(e => e.Training);
-            return View(employeesNotPassed.ToList());
+        {                        
+            return View(GetEmployeeNotPassed());
         }
 
         public ActionResult EmployeesInTraining(int? id)
@@ -158,6 +168,54 @@ namespace TrainingManagmentSystem.Controllers
             db.EmployeeInTrainings.Remove(employeeInTraining);
             db.SaveChanges();
             return RedirectToAction("EmployeesInTraining", new { id = employeeInTraining.TrainingID });
+        }
+
+        private void ExportToExcel(object DataSource)
+        {
+            var gv = new GridView();
+            gv.DataSource = DataSource;
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=DemoExcel.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "utf-8";
+
+            //Here we set the correct encoding so that all characters show!
+            Response.ContentEncoding = System.Text.Encoding.UTF8;
+            Response.Charset = "65001";
+            byte[] b = new byte[] {
+                0xef,
+                0xbb,
+                0xbf
+            };
+            Response.BinaryWrite(b);
+
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
+        }
+
+        public ActionResult EmployeesNotPassedExcel()
+        {
+            var employeesInTrainings = GetEmployeeNotPassed();
+            var result = (from empInTrain in employeesInTrainings
+                          join emp in db.Employees on empInTrain.EmployeeID equals emp.EmployeeID
+                          join train in db.Trainings on empInTrain.TrainingID equals train.TrainingID
+                          select new { תעודת_זהות = emp.EmployeeZehut, שם_משפחה = emp.LastName, שם_פרטי = emp.FirstName, שם_הדרכה = train.Name, עבר = empInTrain.IfPass }).ToList();
+
+            ExportToExcel(result);            
+            return View(employeesInTrainings);
+        }
+
+        [WordDocument]
+        public ActionResult Diploma(int? id)
+        {
+            EmployeeInTraining employeeInTraining = db.EmployeeInTrainings.Find(id);
+            return View(employeeInTraining);
         }
 
         protected override void Dispose(bool disposing)

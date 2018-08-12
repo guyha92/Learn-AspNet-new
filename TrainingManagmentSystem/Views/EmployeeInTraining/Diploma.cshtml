@@ -1,0 +1,27 @@
+﻿@model TrainingManagmentSystem.Models.EmployeeInTraining
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>תעודת גמר</h1>
+<h3>
+    מעונקת בזאת ל 
+</h3>
+<h1>@Model.Employee.LastName  @Model.Employee.FirstName</h1>
+<h3>
+    לאישור שהוא/היא השלים/השלימה בהצלחה
+</h3>
+<h1>
+    @Model.Training.Name
+</h1>
+<h3> בתאריך: 
+    <span>
+        @Model.Training.TrainingDate
+    </span>
+    </h3>
+<p>
+    אגף ההדרכות הפנימיות
+</p>
+

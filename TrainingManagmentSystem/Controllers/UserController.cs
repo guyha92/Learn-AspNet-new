@@ -41,6 +41,7 @@ namespace TrainingManagmentSystem.Controllers
         }
 
         // GET: User/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -51,7 +52,7 @@ namespace TrainingManagmentSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Username,Password,ConfirmPassword,Organization,UserType,LicenseNum,LastName,FirstName,BirthDate,PhoneNum,Email")] User user)
+        public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +84,7 @@ namespace TrainingManagmentSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Username,Password,ConfirmPassword,Organization,UserType,LicenseNum,LastName,FirstName,BirthDate,PhoneNum,Email")] User user)
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
@@ -150,8 +151,6 @@ namespace TrainingManagmentSystem.Controllers
             }            
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             try
@@ -160,6 +159,7 @@ namespace TrainingManagmentSystem.Controllers
                 var ctx = Request.GetOwinContext();
                 var authenticationManager = ctx.Authentication;
                 // Sign Out.    
+                FormsAuthentication.SignOut();
                 authenticationManager.SignOut();
             }
             catch (Exception ex)

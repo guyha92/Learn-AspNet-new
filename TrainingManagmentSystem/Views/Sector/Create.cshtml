@@ -1,19 +1,14 @@
 ﻿@model TrainingManagmentSystem.Models.Sector
-
 @{
     ViewBag.Title = "Create";
 }
+<h2>צור סקטור</h2>
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Sector</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.SectorType, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -22,19 +17,29 @@
                 @Html.ValidationMessageFor(model => model.SectorType, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="צור סקטור" class="btn btn-sm btn-success" />
+                <a type="button" class="btn btn-primary btn-sm" href="@Url.Action( "index")">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>חזור לרשימה</span>
+                </a>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<style>
+
+    .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11 {
+        float: right;
+    }
+
+    .col-md-2 {
+        width: 120px;
+    }
+</style>

@@ -13,15 +13,19 @@ namespace TrainingManagmentSystem.Controllers
     {
         private OrganizationContext db = new OrganizationContext();
 
+        [Authorize]
         public ActionResult Index(User LogedInUser)
         {
+            var currentUser= db.Users.Where(user => user.UserName == User.Identity.Name).First();
 
-            ViewBag.Message = $"Welcome: { Session["username"] }";
+            ViewBag.Message = $"ברוך הבא { currentUser.FirstName }";
 
-            HomeViewModel HomeVM= new HomeViewModel();            
-            HomeVM.TrainingsNearExpiration = from training in db.Trainings
-                                             where training.TrainingEnd >= (DateTime.Now.AddDays(- 7))
-                                             select training;
+            DateTime SevenDaysAgo = DateTime.Now.AddDays(-7);
+
+            HomeViewModel HomeVM= new HomeViewModel();
+            HomeVM.TrainingsNearExpiration = (from training in db.Trainings
+                                              where training.TrainingEnd >= SevenDaysAgo
+                                              select training).ToList() ;
 
             return View(HomeVM);
 

@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "עובדים";
+}
+
+<h2>רשימת עובדים</h2>
+<br />
+
+
+@using (Html.BeginForm("LoadFromExcel", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label for="file">טען רשימת עובדים מאקסל:</label>
+        <input type="file" class="form-control" id="file" placeholder="קובץ אקסל" name="file">
+        <input type="submit" class="btn btn-primary btn-sm" value="טען" />
+    </div>
+
+   
+}
+

@@ -9,6 +9,11 @@
 
 @*@Html.ActionLink("חזור אחורה", "index");*@
 
+@using (Html.BeginForm("EmployeesNotApprovedExcel", "EmployeeInExternalTraining", FormMethod.Post))
+{
+    <input type="submit" value="ייצא לאקסל" class="btn btn-success btn-sm" />
+}
+
 <table class="table">
     <tr>
         <th>

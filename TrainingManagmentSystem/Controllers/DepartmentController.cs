@@ -15,6 +15,7 @@ namespace TrainingManagmentSystem.Controllers
     {
         private OrganizationContext db = new OrganizationContext();
 
+        [Authorize]
         // GET: Departments
         public ActionResult Index()
         {

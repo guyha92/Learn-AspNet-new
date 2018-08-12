@@ -1,34 +1,61 @@
-﻿@model IEnumerable<TrainingManagmentSystem.Models.subSector>
-
+﻿@model IEnumerable<TrainingManagmentSystem.Models.SubSector>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
+<h2>ניהול תת-סקטורים</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span>צור תת-סקטור</span>
+    </a>
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.subSectorType)
+            @Html.DisplayNameFor(model => model.First().SubSectortype)
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.subSectorType)
+            @Html.DisplayFor(modelItem => item.SubSectortype)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.subSectorID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.subSectorID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.subSectorID })
-        </td>
+        <td style="width:700px;">
+            <div class="btn-group" role="group">
+                <abbr title="עריכה">
+                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id = item.SubSectorID })">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </abbr>
+                <abbr title="פרטים">
+                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details",new { id = item.SubSectorID })">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                </abbr>
+                <abbr title="מחיקה">
+                    <a type="button" class="btn btn-danger btn-sm" href="@Url.Action("Delete",new { id = item.SubSectorID })">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </abbr>
+            </div>
+        </td>       
     </tr>
-}
-
+    }
 </table>
+
+<style>
+
+    abbr[title] {
+        border-bottom: none !important;
+        cursor: inherit !important;
+        text-decoration: none !important;
+    }
+
+    th {
+        text-align: right;
+        width: 120px;
+    }
+</style>

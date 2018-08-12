@@ -4,23 +4,32 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>פרטי סקטור</h2>
 
 <div>
-    <h4>Sector</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SectorType)
-        </dt>
+    <table class="table" style="font-size:12px">
+        <tr>
+            <th>
 
-        <dd>
-            @Html.DisplayFor(model => model.SectorType)
-        </dd>
-
-    </dl>
+                @Html.DisplayNameFor(model => model.SectorType)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.SectorType)
+            </td>
+        </tr>
+     </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SectorID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<td style="width:400px;">
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id=Model.SectorID})">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>ערוך</span>
+        </a>
+    </div>
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action( "index")">
+            <span class="glyphicon glyphicon-list"></span>
+            <span>חזור לרשימה</span>
+        </a>
+    </div>
+</td>

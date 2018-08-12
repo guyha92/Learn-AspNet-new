@@ -7,6 +7,10 @@
 
 <h2>רשימת עובדים שלא עברו הדרכה</h2>
 
+@using (Html.BeginForm("EmployeesNotPassedExcel", "EmployeeInTraining", FormMethod.Post))
+{
+    <input type="submit" value="ייצא לאקסל" class="btn btn-success btn-sm" />
+}
 <table class="table">
     <tr>
         <th>

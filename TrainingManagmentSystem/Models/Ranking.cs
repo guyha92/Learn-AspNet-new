@@ -9,7 +9,8 @@ namespace TrainingManagmentSystem.Models
     public class Ranking
     {
         public int RankingID { get; set; }
-       
+
+        [DisplayName("דירוג")]
         public string Name { get; set; }
 
         public int? SectorID { get; set; }

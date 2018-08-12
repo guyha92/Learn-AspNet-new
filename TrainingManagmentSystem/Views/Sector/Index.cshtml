@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<TrainingManagmentSystem.Models.Sector>
-
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
+<h2>ניהול סקטורים</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span>צור סקטור</span>
+    </a>
 </p>
 <table class="table">
     <tr>
@@ -16,18 +16,45 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SectorType)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SectorID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SectorID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SectorID })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SectorType)
+            </td>
+            <td style="width:700px;">
+                <div class="btn-group" role="group">
+                    <abbr title="עריכה">
+                        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id = item.SectorID })">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </abbr>
+                    <abbr title="פרטים">
+                        <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details",new { id = item.SectorID })">
+                            <span class="glyphicon glyphicon-list"></span>
+                        </a>
+                    </abbr>
+                    <abbr title="מחיקה">
+                        <a type="button" class="btn btn-danger btn-sm" href="@Url.Action("Delete",new { id = item.SectorID })">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </abbr>
+                </div>
+            </td>
+        </tr>
+    }
 </table>
+<style>
+
+    abbr[title] {
+        border-bottom: none !important;
+        cursor: inherit !important;
+        text-decoration: none !important;
+    }
+
+    th {
+        text-align: right;
+        width: 120px;
+    }
+</style>
+

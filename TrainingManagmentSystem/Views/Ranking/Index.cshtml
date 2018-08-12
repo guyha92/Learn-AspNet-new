@@ -4,10 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>ניהול דירוג</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span>צור דירוג</span>
+    </a>
 </p>
 <table class="table">
     <tr>
@@ -22,12 +25,39 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RankingID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RankingID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RankingID })
-        </td>
+        <td style="width:700px;">
+            <div class="btn-group" role="group">
+                <abbr title="עריכה">
+                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id = item.RankingID })">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </abbr>
+                <abbr title="פרטים">
+                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details",new { id = item.RankingID })">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                </abbr>
+                <abbr title="מחיקה">
+                    <a type="button" class="btn btn-danger btn-sm" href="@Url.Action("Delete",new { id = item.RankingID })">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </abbr>
+            </div>
+        </td>        
     </tr>
 }
 
 </table>
+<style>
+
+    abbr[title] {
+        border-bottom: none !important;
+        cursor: inherit !important;
+        text-decoration: none !important;
+    }
+
+    th {
+        text-align: right;
+        width: 120px;
+    }
+</style>

@@ -16,6 +16,7 @@ namespace TrainingManagmentSystem.Controllers
     {
         private OrganizationContext db = new OrganizationContext();
 
+        [Authorize]
         // GET: ExternalTraining
         public ViewResult Index(string sortOrder, string searchString, int? page)
         {

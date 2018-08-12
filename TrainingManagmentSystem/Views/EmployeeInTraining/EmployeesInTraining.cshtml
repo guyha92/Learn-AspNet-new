@@ -47,7 +47,7 @@
             @Html.DisplayFor(modelItem => item.Training.Name)
         </td>
         <td>
-            @Html.CheckBoxFor(modelItem => item.IfPass)
+            @Html.CheckBoxFor(modelItem => item.IfPass, new { @disabled = "disabled" })
         </td>       
         <td style="width:700px;">
             <div class="btn-group" role="group">
@@ -70,6 +70,16 @@
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </abbr>
+                @if (item.IfPass == true)
+                {
+                    <abbr title="הנפק תעודה">
+
+                        <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Diploma",new { id = item.EmployeeInTrainingID })">
+                            <span class="glyphicon glyphicon-list"></span>
+                            <span>הנפק תעודה</span>
+                        </a>
+                    </abbr>                       
+                }
             </div>
         </td>
     </tr>
