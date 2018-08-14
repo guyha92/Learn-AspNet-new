@@ -161,8 +161,12 @@ namespace TrainingManagmentSystem.Controllers
                     employee.LastName = ds.Tables[0].Rows[i]["LastName"].ToString();
                     employee.FirstName = ds.Tables[0].Rows[i]["FirstName"].ToString();
                     employee.TrainingBudget= int.Parse(ds.Tables[0].Rows[i]["TrainingBudget"].ToString());
+                    employee.NumberOfTrainings = int.Parse(ds.Tables[0].Rows[i]["NumberOfTrainings"].ToString());
                     employee.StartDate = DateTime.Parse(ds.Tables[0].Rows[i]["StartDate"].ToString());
                     employee.BirthDate= DateTime.Parse(ds.Tables[0].Rows[i]["BirthDate"].ToString());
+
+                    employee.RemainingBudget = employee.TrainingBudget;
+                    employee.RemainingTrainings = employee.NumberOfTrainings;
 
                     db.Employees.Add(employee);                    
                 }
@@ -203,6 +207,7 @@ namespace TrainingManagmentSystem.Controllers
 
             var defaultEmployee= new Employee();
             defaultEmployee.TrainingBudget = 700;
+            defaultEmployee.NumberOfTrainings = 2;
 
             return View(defaultEmployee);
         }
@@ -219,6 +224,9 @@ namespace TrainingManagmentSystem.Controllers
 
                 try
                 {
+                    employee.RemainingBudget = employee.TrainingBudget;
+                    employee.RemainingTrainings = employee.NumberOfTrainings;
+
                     db.Employees.Add(employee);
                     db.SaveChanges();
                     return RedirectToAction("Index");

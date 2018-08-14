@@ -70,7 +70,9 @@ namespace TrainingManagmentSystem.Controllers
         // GET: ExternalTraining/Create
         public ActionResult Create()
         {
-            return View();
+            var defaultTraining = new ExternalTraining();
+            defaultTraining.Cost = 350;
+            return View(defaultTraining);
         }
 
         // POST: ExternalTraining/Create

@@ -43,8 +43,17 @@ namespace TrainingManagmentSystem.Models
         [DisplayName("אחוז משרה")]
         public double PositionPercentage { get; set; }
 
-        [DisplayName("תקציב להדרכה")]
+        [DisplayName("תקציב שנתי להדרכה")]
         public int TrainingBudget { get; set; }
+
+        [DisplayName("כמות הדרכות בשנה")]
+        public int NumberOfTrainings { get; set; }
+
+        [DisplayName("הדרכות שנותרו")]
+        public int RemainingTrainings { get; set; }
+
+        [DisplayName("תקציב בפועל")]
+        public int RemainingBudget { get; set; }
 
         public virtual ICollection<EmployeeInTraining> EmployeeInTrainings { get; set; }
 

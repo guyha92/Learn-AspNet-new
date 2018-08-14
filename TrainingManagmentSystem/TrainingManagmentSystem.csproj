@@ -246,6 +246,10 @@
     <Compile Include="Migrations\201808121454129_login-attempts.Designer.cs">
       <DependentUpon>201808121454129_login-attempts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808141331275_Employee-Budget.cs" />
+    <Compile Include="Migrations\201808141331275_Employee-Budget.Designer.cs">
+      <DependentUpon>201808141331275_Employee-Budget.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeeInExternalTrainings.cs" />
     <Compile Include="Models\TrainingSubSector.cs" />
@@ -265,6 +269,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesProvider\SiteRoles.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\EmployeeInExternalTrainingVM.cs" />
     <Compile Include="ViewModels\EmployeeTrainingsVM.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
   </ItemGroup>
@@ -482,6 +487,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808121454129_login-attempts.resx">
       <DependentUpon>201808121454129_login-attempts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808141331275_Employee-Budget.resx">
+      <DependentUpon>201808141331275_Employee-Budget.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

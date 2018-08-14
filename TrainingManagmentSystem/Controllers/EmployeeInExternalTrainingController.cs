@@ -11,6 +11,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using TrainingManagmentSystem.DAL;
 using TrainingManagmentSystem.Models;
+using TrainingManagmentSystem.ViewModels;
 
 namespace TrainingManagmentSystem.Controllers
 {
@@ -79,13 +80,15 @@ namespace TrainingManagmentSystem.Controllers
             return RedirectToAction("EmployeesInExternalTraining", new { id = employeeInTraining.ExternalTrainingID });           
         }
 
+
         public ActionResult EmployeesInExternalTraining(int? id)
         {
             List<EmployeeInExternalTraining> trainings =
                (from training in db.EmployeeInExternalTrainings
                 where (training.ExternalTrainingID == id)
                 select training).ToList();
-            var result = trainings;
+            
+            var result = trainings.Select((train) => new EmployeeInExternalTrainingVM(train)).ToList();
             ViewBag.id = id;
             return View(result);
 
@@ -144,6 +147,17 @@ namespace TrainingManagmentSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(employeeInTraining.TrainingStatus == EmployeeInExternalTraining.TrainingStatuses.אושר)
+                {
+                    var employee = db.Employees.Find(employeeInTraining.EmployeeID);
+                    var training = db.ExternalTrainings.Find(employeeInTraining.ExternalTrainingID);
+
+                    employee.RemainingBudget -= Convert.ToInt32(training.Cost.Value);
+                    employee.RemainingTrainings -= 1;
+
+                    db.Entry(employee).State = EntityState.Modified;
+                }
+                
                 db.Entry(employeeInTraining).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("EmployeesInExternalTraining", new { id = employeeInTraining.ExternalTrainingID });

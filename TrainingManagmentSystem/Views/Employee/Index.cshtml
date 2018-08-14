@@ -74,6 +74,9 @@
         <th>
             @Html.DisplayNameFor(model => model.First().TrainingBudget)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().NumberOfTrainings)
+        </th>       
         <th></th>
     </tr>
 
@@ -129,7 +132,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.TrainingBudget)
         </td>
-
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfTrainings)
+        </td>        
 
         <td style="width:400px;">
 

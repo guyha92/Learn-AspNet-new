@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrainingManagmentSystem.Models.EmployeeInExternalTraining>
+﻿@model IEnumerable<TrainingManagmentSystem.ViewModels.EmployeeInExternalTrainingVM>
 
 @{
     ViewBag.Title = "עובדים בהדרכה";
@@ -12,20 +12,21 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Employee.EmployeeZehut)
+            @Html.DisplayNameFor(model => model.First().EmployeeInTraining.Employee.EmployeeZehut)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Employee.LastName)
+            @Html.DisplayNameFor(model => model.First().EmployeeInTraining.Employee.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Employee.FirstName)
+            @Html.DisplayNameFor(model => model.First().EmployeeInTraining.Employee.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Training.Name)
+            @Html.DisplayNameFor(model => model.First().EmployeeInTraining.Training.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TrainingStatus)
+            @Html.DisplayNameFor(model => model.First().EmployeeInTraining.TrainingStatus)
         </th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -35,42 +36,48 @@
 
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Employee.EmployeeZehut)
+            @Html.DisplayFor(modelItem => item.EmployeeInTraining.Employee.EmployeeZehut)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+            @Html.DisplayFor(modelItem => item.EmployeeInTraining.Employee.FirstName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Employee.LastName)
+            @Html.DisplayFor(modelItem => item.EmployeeInTraining.Employee.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Training.Name)
+            @Html.DisplayFor(modelItem => item.EmployeeInTraining.Training.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TrainingStatus)
+            @Html.DisplayFor(modelItem => item.EmployeeInTraining.TrainingStatus)
         </td>       
-        <td style="width:700px;">
+        <td >
             <div class="btn-group" role="group">
                 <abbr title="עריכה">
-                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id = item.EmployeeInExternalTrainingsID })">
+                    <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id = item.EmployeeInTraining.EmployeeInExternalTrainingsID })">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                 </abbr>
 
                 <abbr title="פרטים">
 
-                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details",new { id = item.EmployeeInExternalTrainingsID })">
+                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details",new { id = item.EmployeeInTraining.EmployeeInExternalTrainingsID })">
                         <span class="glyphicon glyphicon-list"></span>
                     </a>
                 </abbr>
 
                 <abbr title="מחיקה">
 
-                    <a type="button" class="btn btn-danger btn-sm" href="@Url.Action("Delete",new { id = item.EmployeeInExternalTrainingsID })">
+                    <a type="button" class="btn btn-danger btn-sm" href="@Url.Action("Delete",new { id = item.EmployeeInTraining.EmployeeInExternalTrainingsID })">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </abbr>
             </div>
+        </td>
+        <td>
+            @if (!item.Alert.IsEmpty())
+            {
+                <span class="text-danger"> @item.Alert</span>
+            }            
         </td>
     </tr>
 
