@@ -122,6 +122,16 @@ namespace TrainingManagmentSystem.Controllers
         }
 
 
+        public ActionResult ReleaseLockedUser(int id)
+        {
+            var lockedUser =  db.Users.Where(user => user.UserId == id).First();
+
+            lockedUser.FailedLoginAttempts = 0;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         //Login User
         [HttpGet]
         public ActionResult Login()
@@ -129,19 +139,49 @@ namespace TrainingManagmentSystem.Controllers
             return View();
         }
 
+        private bool IsLoginAllowed(User loggedInUser)
+        {
+            if (loggedInUser.Role == Models.User.UsersRoles.מנהל)
+                return true;
+
+            var maxLoginAttempts = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxLoginAttempts"]);
+            if (loggedInUser.FailedLoginAttempts < maxLoginAttempts)
+                return true;
+            else
+                return false;
+        }
+
         [HttpPost]
         public ActionResult Login(LoginModel LoginUser) // make validation with the login user and send back the result (check in DB too).
         {
             using (OrganizationContext context = new OrganizationContext())
             {
-                var dataItem = context.Users.Where(dbuser => dbuser.UserName == LoginUser.UserName && dbuser.Password == LoginUser.Password).FirstOrDefault();
+                var dataItem = context.Users.Where(dbuser => dbuser.UserName == LoginUser.UserName).FirstOrDefault();
 
                 if (dataItem != null)
                 {
-                    FormsAuthentication.SetAuthCookie(dataItem.UserName, false);
-                    this.SignInUser(dataItem.UserName, false);                   
-                    return RedirectToAction("Index","home",null);
-                   
+                    if (IsLoginAllowed(dataItem) && dataItem.Password == LoginUser.Password)
+                    {
+                        FormsAuthentication.SetAuthCookie(dataItem.UserName, false);
+                        this.SignInUser(dataItem.UserName, false);
+                        return RedirectToAction("Index", "home", null);
+
+                    }
+                    else
+                    {
+                        if (IsLoginAllowed(dataItem))
+                        {
+                            dataItem.FailedLoginAttempts += 1;
+                            context.SaveChanges();
+
+                            ModelState.AddModelError("", "טעות בשם המשתמש או בסיסמא");
+                            return View();
+                        }else
+                        {
+                            ModelState.AddModelError("", "המשתמש נעול, פנה למנהל");
+                            return View();
+                        }
+                    }
                 }
                 else
                 {

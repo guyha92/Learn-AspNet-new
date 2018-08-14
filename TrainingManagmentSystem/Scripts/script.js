@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     $("#exp").change(function () {
-        var start = new Date($('#start_date').val());
+        var start = new Date($('#end_date').val());
         var duration = $("#exp").val();
         var iNum = parseInt(duration);
         var day = ("0" + start.getDate()).slice(-2);
@@ -61,4 +61,20 @@
     $("#btnReset2").click(function () {
         $("#subsector").val(null).trigger('change');
     });
+
+    $.validator.addMethod('date', function (value, element) {
+        if (this.optional(element)) {
+            return true;
+        }
+        var valid = true;
+        try {
+            $.datepicker.parseDate('dd-mm-yy', value);
+        }
+        catch (err) {
+            valid = false;
+        }
+        return valid;
+    });
+
+    $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
 });

@@ -47,6 +47,7 @@
             @Html.DisplayFor(modelItem => item.Training.Name)
         </td>
         <td>
+            @*added disabled*@
             @Html.CheckBoxFor(modelItem => item.IfPass, new { @disabled = "disabled" })
         </td>       
         <td style="width:700px;">

@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using TrainingManagmentSystem.DAL;
 using TrainingManagmentSystem.Models;
+using TrainingManagmentSystem.ViewModels;
 
 namespace TrainingManagmentSystem.Controllers
 
@@ -200,8 +201,10 @@ namespace TrainingManagmentSystem.Controllers
             ViewBag.Sectors = new SelectList(db.Sectors, "SectorID", "SectorType");
             ViewBag.SubSectorID = new SelectList(db.SubSectors, "SubSectorID", "SubSectorType");
 
+            var defaultEmployee= new Employee();
+            defaultEmployee.TrainingBudget = 700;
 
-            return View();
+            return View(defaultEmployee);
         }
 
         // POST: Employee/Create
@@ -213,10 +216,17 @@ namespace TrainingManagmentSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                    
+
+                try
+                {
                     db.Employees.Add(employee);
                     db.SaveChanges();
                     return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ViewBag.ErrorMessage = "תקלה בזמן השמירה עקב שגיאה בנתונים או שתעודת הזהות כבר קיימת במאגר";
+                }
             }
 
                 ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "Name", employee.DepartmentID);
@@ -227,6 +237,25 @@ namespace TrainingManagmentSystem.Controllers
 
             return View(employee);
 
+        }
+
+        public ActionResult EmployeeTrainings(int empId)
+        {
+            var ViewModel = new EmployeeTrainingsVM();
+
+            var Employee = db.Employees.Where(emp => emp.EmployeeID == empId).First();
+
+            ViewModel.EmployeeName = $"{Employee.LastName} {Employee.FirstName}";
+
+            ViewModel.InternalTrainings = (from empTrain in db.EmployeeInTrainings
+                                           where empTrain.EmployeeID == empId
+                                           select empTrain).ToList();
+
+            ViewModel.ExternalTrainings = (from empTrain in db.EmployeeInExternalTrainings
+                                           where empTrain.EmployeeID == empId
+                                           select empTrain).ToList();
+
+            return View(ViewModel);
         }
 
         //public ActionResult GetTrainingBySector(int id)

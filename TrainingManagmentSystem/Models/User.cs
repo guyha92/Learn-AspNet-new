@@ -52,6 +52,9 @@ namespace TrainingManagmentSystem.Models
 
         [DisplayName("סוג עובד")]
         public UsersRoles Role { get; set; }
+
+        [DisplayName("ניסיונות כניסה כושלים")]
+        public int  FailedLoginAttempts { get; set; }
     }
  }
 

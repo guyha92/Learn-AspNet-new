@@ -8,8 +8,8 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="navbar  navbar-inverse navbar-fixed-top">
@@ -31,9 +31,9 @@
                         <span class="glyphicon glyphicon-circle-arrow-down"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>@Html.ActionLink("עובדים שלא עברו הדרכה", "EmployeesNotPassed", "EmployeeInTraining")</li>
-                        <li>@Html.ActionLink("עובדים ממתינים לאישור וועדה", "EmployeeWaitingForApproval", "EmployeeInExternalTraining")</li>
-                        <li>@Html.ActionLink("עובדים שלא אושרו לקורסים", "EmployeeNotApproved", "EmployeeInExternalTraining")</li>
+                        <li class="text-right">@Html.ActionLink("עובדים שלא עברו הדרכה", "EmployeesNotPassed", "EmployeeInTraining")</li>
+                        <li class="text-right">@Html.ActionLink("עובדים ממתינים לאישור וועדה", "EmployeeWaitingForApproval", "EmployeeInExternalTraining")</li>
+                        <li class="text-right">@Html.ActionLink("עובדים שלא אושרו לקורסים", "EmployeeNotApproved", "EmployeeInExternalTraining")</li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -42,8 +42,8 @@
                         <span class="glyphicon glyphicon-circle-arrow-down"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>@Html.ActionLink("פנים", "Index", "Training")</li>
-                        <li>@Html.ActionLink("חוץ", "Index", "ExternalTraining")</li>
+                        <li class="text-right">@Html.ActionLink("פנים", "Index", "Training")</li>
+                        <li class="text-right">@Html.ActionLink("חוץ", "Index", "ExternalTraining")</li>
                     </ul>
                 </li>
                 <li>@Html.ActionLink("עובדים", "Index", "Employee")</li>
@@ -55,11 +55,11 @@
                             <span class="glyphicon glyphicon-circle-arrow-down"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("משתמשים", "Index", "user")</li>
-                            <li>@Html.ActionLink("סקטור", "Index", "Sector")</li>
-                            <li>@Html.ActionLink("תת-סקטור", "Index", "SubSector")</li>
-                            <li>@Html.ActionLink("דירוג", "Index", "Ranking")</li>
-                            <li>@Html.ActionLink("טען עובדים מאקסל", "LoadFromExcel", "Employee")</li>
+                            <li class="text-right">@Html.ActionLink("משתמשים", "Index", "user")</li>
+                            <li class="text-right">@Html.ActionLink("סקטור", "Index", "Sector")</li>
+                            <li class="text-right">@Html.ActionLink("תת-סקטור", "Index", "SubSector")</li>
+                            <li class="text-right">@Html.ActionLink("דירוג", "Index", "Ranking")</li>
+                            <li class="text-right">@Html.ActionLink("טען עובדים מאקסל", "LoadFromExcel", "Employee")</li>
                         </ul>
                     </li>
                 }
@@ -72,6 +72,10 @@
         <nav class="navbar navbar-default  navbar-fixed-bottom" role="navigation">
             <div class="container text-center">
                 <p class="navbar-text col-md-12 col-sm-12 col-xs-12">&copy; 2018 - TMS-Training Managment System</p>
+                <p>
+                    במקרה של תקלה שלח מייל ל
+                    <a href="mailto:guyha92@gmail.com?Subject=TMS%20Error" target="_top">תמיכה טכנית</a>
+                </p>
             </div>
         </nav>        
     </div>
@@ -83,6 +87,9 @@
     @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
     @Scripts.Render("~/Scripts/moment.js")
 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
 
     @RenderSection("scripts", required: false)
 </body>

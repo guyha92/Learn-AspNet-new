@@ -50,7 +50,12 @@ namespace TrainingManagmentSystem.Controllers
                                             where emp.TrainingID == id
                                             select emp.EmployeeID).ToList();
 
-            var allEmployees = db.Employees.Where((emp) => !employeeAlreadInTraining.Contains(emp.EmployeeID));
+            var training = db.Trainings.Where((train) => train.TrainingID == id).First();
+
+            var subSectors = training.TrainingSubSectors.Select((train) => train.SubSectorID).ToList();
+            
+            var allEmployees = db.Employees.Where((emp) => !employeeAlreadInTraining.Contains(emp.EmployeeID))
+                                .Where((emp)=> subSectors.Contains(emp.SubSectorID));                                            
 
             ViewBag.EmployeeIDs = new SelectList(allEmployees, "EmployeeID", "FirstName").ToList();
             ViewBag.TrainingID = new SelectList(db.Trainings.Where(x=>id==x.TrainingID),"TrainingID","Name");

@@ -23,7 +23,9 @@ namespace TrainingManagmentSystem.Models
 
         [Key]
         public int EmployeeID { get; set; }
+
         [DisplayName("תעודת זהות")]
+        [Index(IsUnique =true)]
         public int EmployeeZehut { get; set; }
         [DisplayName("מין")]
         public Gender Gender { get; set; }

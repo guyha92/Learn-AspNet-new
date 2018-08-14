@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "ניהול משתמשים";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var maxLoginAttempts =  int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxLoginAttempts"]);
 }
 <h2>ניהול משתמשים</h2>
 <p>
@@ -95,6 +96,15 @@
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </abbr>
+
+                @if (item.FailedLoginAttempts == maxLoginAttempts)
+                {
+                    <abbr title="שחרר משתמש">
+                        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("ReleaseLockedUser",new { id = item.UserId })">
+                            שחרר משתמש נעול
+                        </a>
+                    </abbr>
+                }              
             </div>
         </td>
     </tr>

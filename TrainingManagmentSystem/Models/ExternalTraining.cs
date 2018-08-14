@@ -16,7 +16,7 @@ namespace TrainingManagmentSystem.Models
         [DisplayName("סוג השתלמות")]
         public string type { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yy}", ApplyFormatInEditMode = true)]
         [DisplayName("תאריך התחלה")]
         public DateTime TrainingDate { get; set; }
         [DisplayName("משך בימים")]
@@ -24,7 +24,7 @@ namespace TrainingManagmentSystem.Models
         [DisplayName("מספר מפגשים")]
         public int NumberOfMeetings { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yy}", ApplyFormatInEditMode = true)]
         [DisplayName("תאריך סיום ")]
         public DateTime TrainingEnd { get; set; }
         [DisplayName("מיקום הדרכה")]
