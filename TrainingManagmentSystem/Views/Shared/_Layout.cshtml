@@ -7,7 +7,6 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet"/>
 </head>
@@ -68,18 +67,19 @@
             </ul>
         </div>
     </div>
-    <div class="container">
-        @RenderBody()        
-        <nav class="navbar navbar-default  navbar-fixed-bottom" role="navigation">
-            <div class="container text-center">
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+    <footer class="footer">
+        <div class="container text-center">
                 <p class="navbar-text col-md-12 col-sm-12 col-xs-12">&copy; 2018 - TMS-Training Managment System</p>
                 <p>
                     במקרה של תקלה שלח מייל ל
                     <a href="mailto:guyha92@gmail.com?Subject=TMS%20Error" target="_top">תמיכה טכנית</a>
                 </p>
-            </div>
-        </nav>        
-    </div>
+           </div>
+    </footer>
+ 
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -96,10 +96,14 @@
 </body>
 </html>
 <style>
-    .footer{
-        float:left;
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background-color: #f5f5f5;
     }
-
     .dropdown:hover .dropdown-menu {
         display: block;
     }
