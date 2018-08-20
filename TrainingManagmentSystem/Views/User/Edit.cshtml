@@ -64,7 +64,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.BirthDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "birth_date", @readonly = "readonly" })
+                @Html.TextBoxFor(model => model.BirthDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "birth_date" })
                 @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
             </div>
         </div>
