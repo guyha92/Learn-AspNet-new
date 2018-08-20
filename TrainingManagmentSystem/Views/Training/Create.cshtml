@@ -29,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TrainingDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TrainingDate, new { htmlAttributes = new { @class = "form-control", @id = "start_date" } })
+                @Html.TextBoxFor(model => model.TrainingDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @id = "start_date" } )
                 @Html.ValidationMessageFor(model => model.TrainingDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TrainingEnd, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TrainingEnd, new { htmlAttributes = new { @class = "form-control", @id = "end_date" } })
+                @Html.TextBoxFor(model => model.TrainingEnd, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @id = "end_date" } )
                 @Html.ValidationMessageFor(model => model.TrainingEnd, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -135,7 +135,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script type="text/javascript" src="../Scripts/script.js"></script>
 

@@ -1,19 +1,34 @@
 ﻿$(document).ready(function () {
 
-    $("#exp").change(function () {
-        var start = new Date($('#end_date').val());
-        if (start == 'Invalid Date') {
+    function setExpDate() {
+        if ($('#end_date').val() != '' &&
+            $("#exp").val() != '') {
+
             start = Date.parse($('#end_date').val().toString().replace(/([0-9]+)\/([0-9]+)/, '$2/$1'));
             start = new Date(start);
-        }
-        var duration = $("#exp").val();
-        var iNum = parseInt(duration);
-        var day = ("0" + start.getDate()).slice(-2);
-        var month = ("0" + (start.getMonth() + 1)).slice(-2);
-        var year = start.getFullYear() + iNum;
-        var today = (day) + "/" + (month) + "/" +  (year);
+            var duration = $("#exp").val();
+            var iNum = parseInt(duration);
+            var day = zerothis(start.getDate());
+            var month = zerothis(start.getMonth()+1);
+            var year = start.getFullYear() + iNum;
+            var today = (day) + "/" + (month) + "/" + (year);
 
-        $('#exp_date').val(today);
+            $('#exp_date').val(today);
+        }
+    }
+
+    function zerothis(val) {
+        if (parseInt(val) < 10) {
+            val = "0" + val;
+        }
+        return val;
+    }
+
+    $('#end_date').change(function () {
+        setExpDate();
+    })
+    $("#exp").change(function () {
+        setExpDate();
     });    
     
 
