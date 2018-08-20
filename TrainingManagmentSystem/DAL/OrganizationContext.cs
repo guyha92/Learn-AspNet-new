@@ -24,6 +24,10 @@ namespace TrainingManagmentSystem.DAL
         public DbSet<Department> Departments { get; set; }
         public DbSet<ExternalTraining> ExternalTrainings { get; set; }
         public DbSet<Ranking> Rankings { get; set; }
+        public DbSet<Qualification> Qualification { get; set; }
+
+        public DbSet<EmployeeQualification> EmployeeQualification { get; set; }
+
         public DbSet<Degree> Degrees { get; set; }
         public DbSet<EmployeeInTraining> EmployeeInTrainings { get; set; }
         public DbSet<EmployeeInExternalTraining> EmployeeInExternalTrainings { get; set; }

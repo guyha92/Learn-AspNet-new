@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using TrainingManagmentSystem.DAL;
@@ -20,13 +22,13 @@ namespace TrainingManagmentSystem.Controllers
 
             ViewBag.Message = $"ברוך הבא { currentUser.FirstName }";
 
-            DateTime SevenDaysAgo = DateTime.Now.AddDays(-7);
+            DateTime SevenDaysAgo = DateTime.Now.AddDays(7);
 
             HomeViewModel HomeVM= new HomeViewModel();
-            HomeVM.TrainingsNearExpiration = (from training in db.Trainings
-                                              where training.TrainingEnd >= SevenDaysAgo
-                                              select training).ToList() ;
 
+            HomeVM.QualificationsNearExpiration =  db.EmployeeQualification.Include(e => e.Employee).Include(e => e.Qualification).
+                                        Where(empQual => empQual.ExpirationDate <= SevenDaysAgo).ToList();
+           
             return View(HomeVM);
 
         }

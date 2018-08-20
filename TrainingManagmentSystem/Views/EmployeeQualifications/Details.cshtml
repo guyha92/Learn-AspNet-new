@@ -1,0 +1,61 @@
+﻿@model TrainingManagmentSystem.Models.EmployeeQualification
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>פרטי ההכשרה לעובד</h2>
+
+<div>
+    <table class="table" style="font-size:12px">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee.LastName)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Employee.LastName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee.FirstName)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.Employee.FirstName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Qualification.Name)
+            </th>
+                <td>
+                    @Html.DisplayFor(model => model.Qualification.Name)
+                </td>
+            </tr>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ExpirationDate)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.ExpirationDate)
+            </td>
+        </tr>
+    </table>
+</div>
+<td style="width:400px;">
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="javascript:void(0);" onclick="history.go(-1);" >
+            <span class="glyphicon glyphicon-list"></span>
+            <span>חזור לרשימה</span>
+        </a>
+    </div>
+</td>
+<style>
+    th {
+        text-align: right
+    }
+</style>

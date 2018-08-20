@@ -30,7 +30,6 @@ namespace TrainingManagmentSystem.Models
         [DisplayName("מיקום הדרכה")]
         public string Location { get; set; }
         [DisplayName("עלות")]
-        [DataType(DataType.Currency)]
         public float? Cost { get; set; }
         //public virtual Employee Employee { get; set; }
     }

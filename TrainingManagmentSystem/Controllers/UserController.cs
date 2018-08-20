@@ -131,11 +131,11 @@ namespace TrainingManagmentSystem.Controllers
 
             return RedirectToAction("Index");
         }
-
+   
         //Login User
         [HttpGet]
         public ActionResult Login()
-        {
+        {                 
             return View();
         }
 

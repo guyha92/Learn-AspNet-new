@@ -65,12 +65,9 @@ namespace TrainingManagmentSystem.Models
 
         public virtual ICollection<EmployeeInTraining> EmployeeInTrainings { get; set; }
 
-
-
-
-
-
-
-}
+        [DisplayName("הכשרה")]
+        public int QualificationID { get; set; }
+        public Qualification Qualification { get; set; }
+    }
 
 }

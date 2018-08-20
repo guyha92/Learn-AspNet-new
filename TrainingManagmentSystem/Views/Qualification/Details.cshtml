@@ -1,0 +1,32 @@
+﻿@model TrainingManagmentSystem.Models.Qualification
+@{
+    ViewBag.Title = "Details";
+}
+<h2>פרטי ההכשרה</h2>
+<div>
+    <table class="table" style="font-size:12px">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+    </table>
+
+</div>
+<td style="width:400px;">
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Edit",new { id=Model.QualificationID})">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>ערוך</span>
+        </a>
+    </div>
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action( "index")">
+            <span class="glyphicon glyphicon-list"></span>
+            <span>חזור לרשימה</span>
+        </a>
+    </div>
+</td>

@@ -8,6 +8,6 @@ namespace TrainingManagmentSystem.ViewModels
 {
     public class HomeViewModel
     {
-        public List<Training> TrainingsNearExpiration { get; set; }
+        public List<EmployeeQualification> QualificationsNearExpiration { get; set; }
     }
 }

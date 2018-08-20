@@ -1,0 +1,44 @@
+﻿@model TrainingManagmentSystem.Models.Qualification
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>מחיקת הכשרה</h2>
+<h3>
+    האם את/ה בטוח/ה שברצונך להסיר את ההכשרה הזאת?
+</h3>
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+    </table>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="הסר" class="btn btn-danger" />
+                <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("index")">
+                    <span class="glyphicon glyphicon-list"></span>
+                    <span>חזור לרשימה</span>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+<style>
+
+    th {
+        text-align: right
+    }
+
+    table {
+        font-size: 12px
+    }
+</style>

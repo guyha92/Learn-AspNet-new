@@ -200,8 +200,10 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeInExternalTrainingController.cs" />
     <Compile Include="Controllers\EmployeeInTrainingController.cs" />
+    <Compile Include="Controllers\EmployeeQualificationsController.cs" />
     <Compile Include="Controllers\ExternalTrainingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QualificationController.cs" />
     <Compile Include="Controllers\RankingController.cs" />
     <Compile Include="Controllers\SectorController.cs" />
     <Compile Include="Controllers\SubSectorController.cs" />
@@ -250,8 +252,22 @@
     <Compile Include="Migrations\201808141331275_Employee-Budget.Designer.cs">
       <DependentUpon>201808141331275_Employee-Budget.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808141547155_qualification.cs" />
+    <Compile Include="Migrations\201808141547155_qualification.Designer.cs">
+      <DependentUpon>201808141547155_qualification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808141612418_qualification-training.cs" />
+    <Compile Include="Migrations\201808141612418_qualification-training.Designer.cs">
+      <DependentUpon>201808141612418_qualification-training.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808201147092_employee-qualification.cs" />
+    <Compile Include="Migrations\201808201147092_employee-qualification.Designer.cs">
+      <DependentUpon>201808201147092_employee-qualification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmployeeInExternalTrainings.cs" />
+    <Compile Include="Models\EmployeeQualification.cs" />
+    <Compile Include="Models\Qualification.cs" />
     <Compile Include="Models\TrainingSubSector.cs" />
     <Compile Include="Models\Degree.cs" />
     <Compile Include="Models\Department.cs" />
@@ -446,6 +462,13 @@
     <Content Include="Views\Employee\LoadFromExcel.cshtml" />
     <Content Include="Views\Shared\_LayoutWord.cshtml" />
     <Content Include="Views\EmployeeInTraining\Diploma.cshtml" />
+    <Content Include="Views\Qualification\Create.cshtml" />
+    <Content Include="Views\Qualification\Delete.cshtml" />
+    <Content Include="Views\Qualification\Details.cshtml" />
+    <Content Include="Views\Qualification\Edit.cshtml" />
+    <Content Include="Views\Qualification\Index.cshtml" />
+    <Content Include="Views\EmployeeQualifications\Details.cshtml" />
+    <Content Include="Views\EmployeeQualifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -490,6 +513,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808141331275_Employee-Budget.resx">
       <DependentUpon>201808141331275_Employee-Budget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808141547155_qualification.resx">
+      <DependentUpon>201808141547155_qualification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808141612418_qualification-training.resx">
+      <DependentUpon>201808141612418_qualification-training.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808201147092_employee-qualification.resx">
+      <DependentUpon>201808201147092_employee-qualification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

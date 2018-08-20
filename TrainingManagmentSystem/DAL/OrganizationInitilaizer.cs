@@ -69,12 +69,21 @@ namespace TrainingManagmentSystem.DAL
             subSectors.ForEach(s => context.SubSectors.Add(s));
             context.SaveChanges();
 
+            var qualifications = new List<Qualification>
+            {
+            new Qualification{QualificationID=1,Name="עזרה ראשונה"},
+            new Qualification{QualificationID=2,Name="כיבוי אש"},
+            new Qualification{QualificationID=3,Name="צינתור"},
+            new Qualification{QualificationID=5,Name="שירות לקוחות"},
+            };
 
+            qualifications.ForEach(q => context.Qualification.Add(q));
+            context.SaveChanges();
 
             var users = new List<User>
             {
-                new User{UserId=1,BirthDate=DateTime.Parse("01-09-1992"),ValidationPassword="123", Email="guyha92@gmail.com",FirstName="גיא",LastName="חקון",LicenseNum="123",Password="123",Organization="בית חולים",PhoneNum="0524666423",UserName="guyha",Role=User.UsersRoles.מנהל},
-                new User{UserId=1,BirthDate=DateTime.Parse("01-09-1992"),ValidationPassword="123", Email="guyha10@gmail.com",FirstName="מארק",LastName="חכם",LicenseNum="123",Password="123",Organization="בית חולים",PhoneNum="0524666423",UserName="yaniv",Role=User.UsersRoles.רגיל}
+                new User{UserId=1,BirthDate=DateTime.Parse("01-09-1992"),ValidationPassword="123", Email="guyha92@gmail.com",FirstName="גיא",LastName="חקון",LicenseNum="123",Password="123",Organization="בית חולים",PhoneNum="0524666423",UserName="guyha",Role=TrainingManagmentSystem.Models.User.UsersRoles.מנהל},
+                new User{UserId=1,BirthDate=DateTime.Parse("01-09-1992"),ValidationPassword="123", Email="guyha10@gmail.com",FirstName="מארק",LastName="חכם",LicenseNum="123",Password="123",Organization="בית חולים",PhoneNum="0524666423",UserName="yaniv",Role=TrainingManagmentSystem.Models.User.UsersRoles.רגיל}
             };
             users.ForEach(s => context.Users.Add(s));
             context.SaveChanges();
@@ -82,12 +91,13 @@ namespace TrainingManagmentSystem.DAL
 
             var trainings = new List<Training>
             {
-
                 
-                new Training{TrainingID=1,ExpireDate=2,Name="החייאה", NumberOfMeetings=2,Duration=12,TrainingEnd=DateTime.Parse("18-11-2017") ,Location="חדר 1", TrainingDate=DateTime.Parse("11-11-2017"),ExpirationDate =DateTime.Parse("11-11-2017") },
-                new Training{TrainingID=2,ExpireDate=1 ,Name="כיבוי אש", NumberOfMeetings=2,Location="חדר 2",Duration=12,TrainingEnd=DateTime.Parse("5-6-2018") ,TrainingDate=DateTime.Parse("29-05-2018"),ExpirationDate =DateTime.Parse("11-11-2017") },
+                new Training{TrainingID=1,ExpireDate=2,Name="החייאה", NumberOfMeetings=2,Duration=12,TrainingEnd=DateTime.Parse("18-11-2017") ,Location="חדר 1", TrainingDate=DateTime.Parse("11-11-2017"),ExpirationDate =DateTime.Parse("11-11-2017") ,QualificationID=1},
+                new Training{TrainingID=2,ExpireDate=1 ,Name="כיבוי אש", NumberOfMeetings=2,Location="חדר 2",Duration=12,TrainingEnd=DateTime.Parse("5-6-2018") ,TrainingDate=DateTime.Parse("29-05-2018"),ExpirationDate =DateTime.Parse("11-11-2017") , QualificationID =2},
 
             };
+            trainings[0].AddSubSector(subSectors[0]);
+            trainings[1].AddSubSector(subSectors[1]);
             trainings.ForEach(s => context.Trainings.Add(s));
             context.SaveChanges();
 

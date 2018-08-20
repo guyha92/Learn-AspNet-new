@@ -11,87 +11,44 @@
 <br />
 
 <h3>
-    הדרכות שפגו או יפוגו בקרוב
+    הכשרות שפגו או יפוגו בקרוב
 </h3>
 
 <table class="table" style="font-size:13px">
 
 <tr>
     <th>
-        <span>סקטור</span>
+        @Html.DisplayNameFor(model => model.QualificationsNearExpiration.First().Employee.LastName)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.TrainingsNearExpiration.First().TrainingSubSectors)
+        @Html.DisplayNameFor(model => model.QualificationsNearExpiration.First().Employee.FirstName)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.TrainingsNearExpiration.First().Name)
+        @Html.DisplayNameFor(model => model.QualificationsNearExpiration.First().Qualification.Name)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.TrainingsNearExpiration.First().TrainingDate)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.TrainingsNearExpiration.First().ExpireDate)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.TrainingsNearExpiration.First().TrainingEnd)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.TrainingsNearExpiration.First().ExpirationDate)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.TrainingsNearExpiration.First().NumberOfMeetings)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.TrainingsNearExpiration.First().Duration)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.TrainingsNearExpiration.First().Location)
+        @Html.DisplayNameFor(model => model.QualificationsNearExpiration.First().ExpirationDate)
     </th>
     <th></th>
 </tr>
-@foreach (var item in Model.TrainingsNearExpiration)
+@foreach (var item in Model.QualificationsNearExpiration)
 {
-    <tr>
+    <tr>    
         <td>
-            @foreach (var i in (item.TrainingSubSectors))
-            {
-                <div>&nbsp;@Html.DisplayFor(modelItem => i.SubSector.Sector.SectorType)</div>
-            }
-        </td>
-
-        <td>
-            @foreach (var j in (item.TrainingSubSectors))
-            {
-                <div>&nbsp;@Html.DisplayFor(modelItem => j.SubSector.SubSectortype)</div>
-            }
+            @Html.DisplayFor(modelItem => item.Employee.LastName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
+            @Html.DisplayFor(modelItem => item.Employee.FirstName)
         <td>
-            @Html.DisplayFor(modelItem => item.TrainingDate)
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpireDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrainingEnd)
+            @Html.DisplayFor(modelItem => item.Qualification.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ExpirationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberOfMeetings)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
+        </td>        
         <td style="width:700px;">
             <div class="btn-group" role="group">                
                 <abbr title="פרטים">
-                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details","Training",new { id=item.TrainingID },null)">
+                    <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Details","EmployeeQualifications",new { id=item.EmployeeQualificationID },null)">
                         <span class="glyphicon glyphicon-list"></span>
                     </a>
                 </abbr>

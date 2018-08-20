@@ -27,8 +27,7 @@ namespace TrainingManagmentSystem.Controllers
                 page = 1;
             }
 
-            var trainings = from t in db.Trainings
-                            select t;
+            var trainings = db.Trainings.Include(t => t.Qualification);
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -86,7 +85,7 @@ namespace TrainingManagmentSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Training training = db.Trainings.Find(id);
+            Training training = db.Trainings.Include(t => t.Qualification).Where(train => train.TrainingID ==id).First();
             if (training == null)
             {
                 return HttpNotFound();
@@ -101,7 +100,7 @@ namespace TrainingManagmentSystem.Controllers
 
             ViewBag.Sectors = new MultiSelectList(db.Sectors, "SectorID", "SectorType");
             ViewBag.subSectors = new MultiSelectList(db.SubSectors, "SubSectorID", "SubSectortype");
-
+            ViewBag.QualificationID = new SelectList(db.Qualification, "QualificationID", "Name");
             return View();
         }
 
@@ -110,30 +109,17 @@ namespace TrainingManagmentSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TrainingID,Name,TrainingDate,Location,TrainingEnd,NumberOfMeetings,Duration,ExpireDate,ExpirationDate")] Training training, int[] subsectors)
+        public ActionResult Create([Bind(Include = "TrainingID,Name,TrainingDate,Location,TrainingEnd,NumberOfMeetings,Duration,ExpireDate,ExpirationDate,QualificationID")] Training training, int[] subsectors)
         {
 
             if (ModelState.IsValid)
             {
-                //if (sectors != null)
-                //{
-                //    foreach (var id in sectors)
-                //    {
-                //        Sector sector = db.Sectors.Find(id);
-                //        training.TrainingSectors.Add(sector);
-
-
-                //    }
+                
                 foreach (var id in subsectors)
                 {
                     SubSector subsector = db.SubSectors.Find(id);
                     training.AddSubSector(subsector);
-
-
-
                 }
-
-
 
                 db.Trainings.Add(training);
                 db.SaveChanges();
@@ -141,7 +127,9 @@ namespace TrainingManagmentSystem.Controllers
             }
 
 
-
+            ViewBag.Sectors = new MultiSelectList(db.Sectors, "SectorID", "SectorType");
+            ViewBag.subSectors = new MultiSelectList(db.SubSectors, "SubSectorID", "SubSectortype");
+            ViewBag.QualificationID = new SelectList(db.Qualification, "QualificationID", "Name");
             return View(training);
         }
 
@@ -164,10 +152,9 @@ namespace TrainingManagmentSystem.Controllers
             var subsectorlist = (from s in training.TrainingSubSectors
                                  select s.SubSectorID).ToArray();
 
-            ViewBag.Sectors = new MultiSelectList(db.Sectors, "SectorID", "SectorType");
+            ViewBag.Sectors = new MultiSelectList(db.Sectors, "SectorID", "SectorType", sectorlist);
             ViewBag.subSectors = new MultiSelectList(db.SubSectors, "SubSectorID", "SubSectortype", subsectorlist);
-
-
+            ViewBag.QualificationID = new SelectList(db.Qualification, "QualificationID", "Name",training.QualificationID);
 
             return View(training);
         }
@@ -178,7 +165,7 @@ namespace TrainingManagmentSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TrainingID,Name,TrainingDate,Location,TrainingEnd,NumberOfMeetings,Duration,ExpireDate,ExpirationDate")] Training training, int[] subsectors)
+        public ActionResult Edit([Bind(Include = "TrainingID,Name,TrainingDate,Location,TrainingEnd,NumberOfMeetings,Duration,ExpireDate,ExpirationDate,QualificationID")] Training training, int[] subsectors)
         {
             if (ModelState.IsValid)
             {
@@ -193,10 +180,6 @@ namespace TrainingManagmentSystem.Controllers
 
                 }
 
-
-
-
-
                 foreach (var id in subsectors)
                 {
                     
@@ -206,7 +189,16 @@ namespace TrainingManagmentSystem.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            
+            var sectorlist = (from s in training.TrainingSubSectors
+                              select s.SubSector.SectorID).ToArray();
+
+            var subsectorlist = (from s in training.TrainingSubSectors
+                                 select s.SubSectorID).ToArray();
+
+            ViewBag.Sectors = new MultiSelectList(db.Sectors, "SectorID", "SectorType", sectorlist);
+            ViewBag.subSectors = new MultiSelectList(db.SubSectors, "SubSectorID", "SubSectortype", subsectorlist);
+            ViewBag.QualificationID = new MultiSelectList(db.Qualification, "QualificationID", "Name");
+
             return View(training);
 
         }
@@ -219,11 +211,12 @@ namespace TrainingManagmentSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Training training = db.Trainings.Find(id);
+            Training training = db.Trainings.Include(t => t.Qualification).Where(train => train.TrainingID == id).First();
             if (training == null)
             {
                 return HttpNotFound();
             }
+
             return View(training);
         }
 

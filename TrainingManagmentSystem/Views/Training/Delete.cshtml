@@ -120,6 +120,14 @@
                     @Html.DisplayFor(model => model.Location)
                 </td>
             </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.QualificationID)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Qualification.Name)
+                </td>
+            </tr>
         </table>
 
     </div>

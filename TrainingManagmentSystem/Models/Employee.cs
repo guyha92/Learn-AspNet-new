@@ -55,6 +55,8 @@ namespace TrainingManagmentSystem.Models
         [DisplayName("תקציב בפועל")]
         public int RemainingBudget { get; set; }
 
+        public virtual ICollection<EmployeeQualification> Qualifications { get; set; }
+
         public virtual ICollection<EmployeeInTraining> EmployeeInTrainings { get; set; }
 
 

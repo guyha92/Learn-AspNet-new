@@ -198,12 +198,22 @@
     <br />
     <br />
 
+<td style="width:400px;">
+
     <div class="btn-group" role="group">
-        <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("EmployeeTrainings",new { empId=Model.EmployeeID })">
-            <span class="glyphicon glyphicon-list"></span>
+        <a type="button" class="btn btn-success btn-sm" href="@Url.Action("EmployeeTrainings",new { empId=Model.EmployeeID })">
+            <span class="glyphicon glyphicon-calendar"></span>
             <span>הדרכות לעובד</span>
         </a>
     </div>
+
+    <div class="btn-group" role="group">
+        <a type="button" class="btn btn-success btn-sm" href="@Url.Action("Index","EmployeeQualifications",new { empId=Model.EmployeeID })">
+            <span class="glyphicon glyphicon-check"></span>
+            <span>הכשרות לעובד</span>
+        </a>
+    </div>
+ </td>
 
     <style>
         th {

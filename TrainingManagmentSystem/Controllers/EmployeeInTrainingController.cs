@@ -138,6 +138,28 @@ namespace TrainingManagmentSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (employeeInTraining.IfPass)
+                {
+                    var training=  db.Trainings.Find(employeeInTraining.TrainingID);
+                    // Find employee qualification
+                    var empQualification = db.EmployeeQualification.Where(empQual => empQual.EmployeeID == employeeInTraining.EmployeeID && empQual.QualificationID == training.QualificationID).FirstOrDefault();
+
+                    if (empQualification == null){
+                        empQualification = new EmployeeQualification()
+                        {
+                            EmployeeID = employeeInTraining.EmployeeID,
+                            QualificationID = training.QualificationID,
+                            ExpirationDate = training.ExpirationDate
+                        };
+                        db.EmployeeQualification.Add(empQualification);
+                    } else
+                    {
+                        if (empQualification.ExpirationDate < training.ExpirationDate)
+                        {
+                            empQualification.ExpirationDate = training.ExpirationDate;
+                        }
+                    }
+                }
                 db.Entry(employeeInTraining).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("EmployeesInTraining", new { id = employeeInTraining.TrainingID });                
