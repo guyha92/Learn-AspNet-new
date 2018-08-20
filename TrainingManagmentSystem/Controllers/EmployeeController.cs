@@ -208,7 +208,9 @@ namespace TrainingManagmentSystem.Controllers
             var defaultEmployee= new Employee();
             defaultEmployee.TrainingBudget = 700;
             defaultEmployee.NumberOfTrainings = 2;
-
+            defaultEmployee.StartDate = DateTime.Now;
+            defaultEmployee.BirthDate = DateTime.Parse("01/01/1980");
+            defaultEmployee.PositionPercentage = 100;
             return View(defaultEmployee);
         }
 
