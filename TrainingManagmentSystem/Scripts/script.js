@@ -2,12 +2,16 @@
 
     $("#exp").change(function () {
         var start = new Date($('#end_date').val());
+        if (start == 'Invalid Date') {
+            start = Date.parse($('#end_date').val().toString().replace(/([0-9]+)\/([0-9]+)/, '$2/$1'));
+            start = new Date(start);
+        }
         var duration = $("#exp").val();
         var iNum = parseInt(duration);
         var day = ("0" + start.getDate()).slice(-2);
         var month = ("0" + (start.getMonth() + 1)).slice(-2);
         var year = start.getFullYear() + iNum;
-        var today = (year) + "-" + (month) + "-" + (day);
+        var today = (day) + "/" + (month) + "/" +  (year);
 
         $('#exp_date').val(today);
     });    
