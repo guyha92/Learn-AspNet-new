@@ -29,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TrainingDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.TrainingDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @id = "start_date" } )
+                @Html.TextBoxFor(model => model.TrainingDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @id = "start_date" ,@autocomplete = "off" } )
                 @Html.ValidationMessageFor(model => model.TrainingDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -37,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TrainingEnd, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.TrainingEnd, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @id = "end_date" } )
+                @Html.TextBoxFor(model => model.TrainingEnd, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", @id = "end_date", @autocomplete = "off" } )
                 @Html.ValidationMessageFor(model => model.TrainingEnd, "", new { @class = "text-danger" })
             </div>
         </div>
