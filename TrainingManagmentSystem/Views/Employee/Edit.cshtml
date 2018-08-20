@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.BirthDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+                @Html.TextBoxFor(model => model.BirthDate, "{0:dd-MM-yyyy}", new { @class = "form-control datepicker" })
                 @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -103,7 +103,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.StartDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+                @Html.TextBoxFor(model => model.StartDate, "{0:dd-MM-yyyy}", new { @class = "form-control datepicker" })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
