@@ -68,7 +68,7 @@
         }
         var valid = true;
         try {
-            $.datepicker.parseDate('dd-mm-yy', value);
+            $.datepicker.parseDate('dd/mm/yy', value);
         }
         catch (err) {
             valid = false;
@@ -76,5 +76,5 @@
         return valid;
     });
 
-    $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
+    $('.datepicker').datepicker({ dateFormat: 'dd/mm/yy' });
 });
